@@ -38,8 +38,11 @@ class UsersRepository implements IUsersRepository {
         return this.ormRepository.find();
     }
 
-    public async delete(id: string): Promise<any> {
-        return this.ormRepository.delete(id);
+    public async delete(id: string): Promise<User> {
+        await this.ormRepository.delete(id);
+        return this.ormRepository.findOne({
+            where: { id },
+        });
     }
 }
 

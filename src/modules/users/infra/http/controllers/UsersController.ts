@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+
+import DeleteUserService from '../../../services/DeleteUserService';
 import UpdateUserService from '../../../services/UpdateUserService';
-
 import CreateUserService from '../../../services/CreateUserService';
-
 import ReadAllUserService from '../../../services/ReadAllUserService';
+
+import AppSuccess from '../../../../../shared/success/AppSuccess';
 
 export default class UsersControllers {
     public async create(
@@ -66,6 +68,19 @@ export default class UsersControllers {
         request: Request,
         response: Response,
     ): Promise<Response> {
+        const { id } = request.params;
+
+        const deletedService = container.resolve(DeleteUserService);
+
+        const { isDeleted } = await deletedService.execute({ id });
+
+        if (isDeleted) {
+            return response.json(
+                new AppSuccess('the user It has been deleted with success!'),
+            );
+        }
+
+        // se não tem dados, vai cair no erro gerado pela api
         return response.json();
     }
 }
