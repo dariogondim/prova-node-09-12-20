@@ -6,4 +6,6 @@ export default interface IUsersRepository {
     readAll(): Promise<User[]>;
     update(user: User): Promise<User>;
     delete(user: User): Promise<User>;
+    findById(id: string): Promise<User | undefined>;
+    findByEmail(email: string): Promise<User | undefined>;
 }
