@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { DeleteResult, getRepository, Repository } from 'typeorm';
 import ICreateUserDTO from '../../../dtos/ICreateUserDTO';
 import IUsersRepository from '../../../repositories/IUsersRepository';
 import User from '../entities/User';
@@ -10,28 +10,36 @@ class UsersRepository implements IUsersRepository {
         this.ormRepository = getRepository(User);
     }
 
-    findById(id: string): Promise<User | undefined> {
-        throw new Error('Method not implemented.');
+    public async findById(id: string): Promise<User | undefined> {
+        const user = await this.ormRepository.findOne(id);
+
+        return user;
     }
 
-    findByEmail(email: string): Promise<User | undefined> {
-        throw new Error('Method not implemented.');
+    public async findByEmail(email: string): Promise<User | undefined> {
+        const user = await this.ormRepository.findOne({ where: { email } });
+
+        return user;
     }
 
-    create(data: ICreateUserDTO): Promise<User> {
-        throw new Error('Method not implemented.');
+    public async create(userData: ICreateUserDTO): Promise<User> {
+        const user = this.ormRepository.create(userData);
+
+        await this.ormRepository.save(user);
+
+        return user;
     }
 
-    readAll(): Promise<User[]> {
-        throw new Error('Method not implemented.');
+    public async update(user: User): Promise<User> {
+        return this.ormRepository.save(user);
     }
 
-    update(user: User): Promise<User> {
-        throw new Error('Method not implemented.');
+    public async readAll(): Promise<User[]> {
+        return this.ormRepository.find();
     }
 
-    delete(user: User): Promise<User> {
-        throw new Error('Method not implemented.');
+    public async delete(id: string): Promise<any> {
+        return this.ormRepository.delete(id);
     }
 }
 
