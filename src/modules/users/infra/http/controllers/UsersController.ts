@@ -9,4 +9,25 @@ export default class UsersControllers {
     ): Promise<Response> {
         return response.json();
     }
+
+    public async readAll(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        return response.json();
+    }
+
+    public async update(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        return response.json();
+    }
+
+    public async delete(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        return response.json();
+    }
 }
