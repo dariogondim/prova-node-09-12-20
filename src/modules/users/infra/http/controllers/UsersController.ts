@@ -4,6 +4,8 @@ import UpdateUserService from '../../../services/UpdateUserService';
 
 import CreateUserService from '../../../services/CreateUserService';
 
+import ReadAllUserService from '../../../services/ReadAllUserService';
+
 export default class UsersControllers {
     public async create(
         request: Request,
@@ -29,7 +31,14 @@ export default class UsersControllers {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        return response.json();
+        const readAll = container.resolve(ReadAllUserService);
+        const users = (await readAll.execute()).users.map(user => {
+            // eslint-disable-next-line no-param-reassign
+            delete user.password;
+            return user;
+        });
+
+        return response.json({ users });
     }
 
     public async update(

@@ -8,7 +8,7 @@ const usersRouter = Router();
 const usersControllers = new UsersControllers();
 
 usersRouter.post('/', usersControllers.create);
-// usersRouter.get('/', ensureAuthenticated, usersControllers.readAll);
+usersRouter.get('/', ensureAuthenticated, usersControllers.readAll);
 usersRouter.put('/', ensureAuthenticated, usersControllers.update);
 // usersRouter.delete('/', ensureAuthenticated, usersControllers.delete);
 
