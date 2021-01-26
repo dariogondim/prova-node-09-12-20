@@ -3,7 +3,8 @@ import { verify } from 'jsonwebtoken';
 import AppError from '../../../../../shared/errors/AppError';
 import authConfig from '../../../../../config/auth';
 
-interface ITokenPayload {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+interface TokenPayload {
     iat: number;
     exp: number;
     sub: string;
@@ -25,11 +26,12 @@ export default function ensureAuthenticated(
     try {
         const decoded = verify(token, authConfig.jwt.secret);
 
-        const { sub } = decoded as ITokenPayload;
+        const { sub } = decoded as TokenPayload;
 
-        request.user = { id: sub };
+        request.body.decoded = {
+            user: { id: sub },
+        };
 
-        console.log(decoded);
         next();
     } catch {
         throw new AppError('Invalid JWT Token', 401);

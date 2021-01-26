@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-
 import { container } from 'tsyringe';
+import UpdateUserService from '../../../services/UpdateUserService';
+
 import CreateUserService from '../../../services/CreateUserService';
 
 export default class UsersControllers {
@@ -35,7 +36,21 @@ export default class UsersControllers {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        return response.json();
+        const { name, username, email } = request.body;
+        const { id } = request.body.decoded.user;
+
+        const updateUser = container.resolve(UpdateUserService);
+
+        const { user } = await updateUser.execute({
+            id,
+            name,
+            username,
+            email,
+        });
+
+        delete user.password;
+
+        return response.json({ user });
     }
 
     public async delete(
