@@ -13,12 +13,12 @@ A idéia é deixar o candidato bem livre pra reimplementar o código da maneira 
 1. Qualidade de código
 2. Uso de patterns adequados
 3. Estratégia de validação de dados
-4. Testes unitários
+4. Testes unitários -- Faltou completar os testes, nao deu tempo
 
 ## O que é desejado (não obrigatório) na entrega?
 
 1. Adição de Banco de dados
-2. Utilização de docker
+2. Utilização de docker -- foi utilizado docker mas também não deu tempo concluir o ambiente env ou docker-compose
 3. Autenticação
 4. Utilização de typescript
 
