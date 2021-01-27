@@ -25,3 +25,19 @@ A idéia é deixar o candidato bem livre pra reimplementar o código da maneira 
 ## Como será feita a entrega?
 
 Deverá ser realizado um fork deste repositório e no formulário enviado você deverá responder com o link deste fork.
+
+## Considerações sobre o projeto
+
+1. O projeto utilza uma imagem docker do postgres e um banco de dados
+   chamado: user_db, pode ser verificado em ormconfig.json
+2. O projeto usa typeorm com migrations. Após a instalação da imagem docker e
+da criação do banco de dados, basta executar:
+yarn typeorm migration:run para que ele execute a migração e crie a única tabela de usuários requerida pela aplicação
+3. O projeto é bem parecido com outro projeto disposto em:
+https://github.com/rocketseat-education/bootcamp-gostack-modulos/tree/master/nivel-04/02-finalizando-backend-do-app
+
+Que é um projeto de um curso da rocketseat do gostack
+
+Como pede basicamente os mesmos requisitos uma parte do codigo foi aproveitada mas ele foi modificado a minha maneira e reconstruido do zero. Gosto da separação de pastas e da forma como o projeto pode ser construido usando essa estrutura mas existem outras formas muito boas de se fazê-lo também, com o uso de nestjs, por exemplo
+
+Devido ao prazo curto de apenas um dia para fazê-lo e como ultimamente não estou com muito tempo disponível, o projeto não foi concluido como eu queria na parte dos testes
